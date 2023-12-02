@@ -49,6 +49,8 @@ export async function createContext<T extends Node>(node: T, options?: Options &
       bypassingCache: false,
       ...options?.fetch,
     },
+    fetchFn: null,
+    includeStyleProperties: null,
     font: {},
     drawImageInterval: 100,
     workerUrl: null,

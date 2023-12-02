@@ -70,6 +70,23 @@ export interface Options {
   debug?: boolean
 
   /**
+   * Custom implementation to get image data for a custom URL.
+   * This can be helpful for Capacitor or Cordova when using
+   * native fetch to bypass CORS issues.
+   *
+   * If returns a string, will completely bypass any `Options.fetch`
+   * settings with your custom implementation.
+   *
+   * If returns false, will fall back to normal fetch implementation
+   *
+   * @param url
+   * @returns A data URL for the image
+   */
+  fetchFn?: ((
+    url: string,
+  ) => Promise<string | false>) | null
+
+  /**
    * The options of fetch resources.
    */
   fetch?: {
@@ -183,4 +200,12 @@ export interface Options {
    * Triggered after a ForeignObjectSvg is created
    */
   onCreateForeignObjectSvg?: ((svg: SVGSVGElement) => void) | null
+
+  /**
+   * An array of style property names.
+   * Can be used to manually specify which style properties are
+   * included when cloning nodes.
+   * This can be useful for performance-critical scenarios.
+   */
+  includeStyleProperties?: string[] | null
 }
